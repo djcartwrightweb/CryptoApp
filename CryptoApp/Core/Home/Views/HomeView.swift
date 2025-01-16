@@ -9,13 +9,12 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @Environment(HomeViewModel.self) private var homeVm
+    @StateObject var vm = HomeViewModel()
     
     @State private var showPortfolio = false
     
     var body: some View {
         
-        @Bindable var vm = homeVm
         
         ZStack {
             //background layer
@@ -50,7 +49,7 @@ struct HomeView: View {
             .toolbar(.hidden)
 //            .preferredColorScheme(.dark)
     }
-    .environment(DeveloperPreview.shared.homeVm)
+
 }
 
 
@@ -86,7 +85,7 @@ extension HomeView {
     
     private var allCoinsList: some View {
         List {
-            ForEach(homeVm.allCoins) { coin in
+            ForEach(vm.allCoins) { coin in
                 CoinRowView(coin: coin, showHoldingsColumn: false)
                     .listRowInsets(.init(top: 10, leading: 0, bottom: 10, trailing: 10))
             }
@@ -96,7 +95,7 @@ extension HomeView {
     
     private var portfolioCoinsList: some View {
         List {
-            ForEach(homeVm.portfolioCoins) { coin in
+            ForEach(vm.portfolioCoins) { coin in
                 CoinRowView(coin: coin, showHoldingsColumn: true)
                     .listRowInsets(.init(top: 10, leading: 0, bottom: 10, trailing: 10))
             }
