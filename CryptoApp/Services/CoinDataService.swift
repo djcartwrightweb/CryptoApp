@@ -10,7 +10,6 @@ import Combine
 
 class CoinDataService {
     @Published var allCoins: [CoinModel] = []
-    
     var coinSubscription: AnyCancellable?
     
     init() {
@@ -39,6 +38,7 @@ class CoinDataService {
                 }
             } receiveValue: { [weak self] (returnedCoins) in
                 self?.allCoins = returnedCoins
+                self?.coinSubscription?.cancel()
             }
             
     }
