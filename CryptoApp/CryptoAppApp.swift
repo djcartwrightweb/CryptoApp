@@ -9,9 +9,16 @@ import SwiftUI
 
 @main
 struct CryptoAppApp: App {
+    
+    @State private var homeVm = HomeViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationStack {
+                HomeView()
+                    .toolbar(.hidden)
+            }
+            .environment(homeVm)
         }
     }
 }
