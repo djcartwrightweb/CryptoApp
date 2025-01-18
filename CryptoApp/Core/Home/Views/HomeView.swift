@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @StateObject var vm = HomeViewModel()
+    @EnvironmentObject private var vm: HomeViewModel
     
     @State private var showPortfolio = false
     
@@ -23,6 +23,8 @@ struct HomeView: View {
             //content layer
             VStack {
                 homeHeader
+                
+                HomeStatsView(showPortfolio: $showPortfolio)
                 
                 SearchBarView(searchText: $vm.searchText)
                 
@@ -47,6 +49,7 @@ struct HomeView: View {
     NavigationStack {
         HomeView()
             .toolbar(.hidden)
+            .environmentObject(DeveloperPreview.shared.homeVm)
 //            .preferredColorScheme(.dark)
     }
 

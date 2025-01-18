@@ -18,7 +18,7 @@ struct CryptoAppApp: App {
                 HomeView()
                     .toolbar(.hidden)
             }
-//            .environment(homeVm)
+            .environmentObject(homeVm)
         }
     }
 }
